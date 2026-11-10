@@ -1,6 +1,6 @@
 ---
 title: "AI-Jobs"
-author: "Reuel"
+author: "CREG-DM"
 date: "2026-11-10"
 output: html_document
 ---
