@@ -1,0 +1,10 @@
+issue,columns,n_records,classification,recommended_action
+Quarterly scores missing before Q3 2026,"score_q1_2025, score_q3_2025, score_q1_2026, score_q2_2026",224,Structural (by design),Do not impute. Restrict time-series work to the 76 roles with full history and report the 300-role cross-section separately
+Current score duplicates Q3 2026 score,"score, score_q3_2026",300,Redundant (not an error),Keep a single score column and build a long-format quarter variable from the history columns
+Score is an exact function of the four sub-scores,"sub_task_automation, sub_tool_maturity, sub_adoption, sub_agentic_exposure",300,Redundant (not an error),Describe sub-scores as components of the composite; do not treat them as independent predictors
+risk_level label disagrees with the score band,"score, risk_level",14,Documented boundary-stability rule,Use score-derived bands for comparisons and keep the published label for reference only
+agentic_risk is a deterministic band of its sub-score,"agentic_risk, sub_agentic_exposure",300,Redundant (not an error),Use the numeric sub-score and drop the band in analysis
+Salary values beyond IQR fences,"salary_low_usd, salary_high_usd",25,Legitimate extreme values,Retain. Analyse salary on a log scale or with rank-based (Spearman) methods
+Score value beyond IQR fence,score,1,Legitimate extreme value,Retain: Data Entry Clerk (92) is the top of the documented 0-100 scale
+Unmatched SOC codes in the crosswalk,"nearest_role_slug, score, risk_level (crosswalk)",33,Structural (out of scope),Exclude from merges or keep and label as unmatched; never assign a score
+"Duplicates, types, ranges, labels, sentinel tokens",all,0,Passed,No action; only type conversions are needed in Step 3

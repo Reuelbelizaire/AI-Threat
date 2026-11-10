@@ -1,0 +1,16 @@
+category,n_roles,n_with_history,pct_missing_history,pct_tier1
+"Hospitality, Food & Personal Service",25,0,100.0,28.0
+Public Service & Safety,15,0,100.0,26.7
+Science & Engineering,20,0,100.0,20.0
+Skilled Trades & Construction,30,0,100.0,26.7
+Transportation & Logistics,20,0,100.0,30.0
+Creative,20,6,70.0,55.0
+Healthcare,30,10,66.7,60.0
+Technology,30,10,66.7,50.0
+Business & Finance,25,10,60.0,60.0
+Education,15,6,60.0,60.0
+Legal,12,5,58.3,58.3
+Administrative & Operations,20,10,50.0,65.0
+HR & Recruiting,10,5,50.0,60.0
+Marketing & Sales,20,10,50.0,65.0
+Project & Product Management,8,4,50.0,62.5
