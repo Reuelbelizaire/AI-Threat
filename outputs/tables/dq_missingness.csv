@@ -1,0 +1,27 @@
+column,n_missing,pct_missing,diagnosis
+slug,0,0,None
+title,0,0,None
+category,0,0,None
+score,0,0,None
+risk_level,0,0,None
+salary_low_usd,0,0,None
+salary_high_usd,0,0,None
+salary_trend,0,0,None
+tasks_at_risk_count,0,0,None
+tasks_growing_count,0,0,None
+defense_skill_1,0,0,None
+defense_skill_2,0,0,None
+defense_skill_3,0,0,None
+insight,0,0,None
+score_q1_2025,224,74.7,Structural: 224 roles were added in v2026.3 and start their history at Q3 2026
+score_q3_2025,224,74.7,Structural: same 224 roles (identical missing pattern)
+score_q1_2026,224,74.7,Structural: same 224 roles (identical missing pattern)
+score_q2_2026,224,74.7,Structural: same 224 roles (identical missing pattern)
+score_q3_2026,0,0,"None: current score, complete for all 300 roles"
+soc_code,0,0,None
+tier,0,0,None
+sub_task_automation,0,0,None
+sub_tool_maturity,0,0,None
+sub_adoption,0,0,None
+sub_agentic_exposure,0,0,None
+agentic_risk,0,0,None

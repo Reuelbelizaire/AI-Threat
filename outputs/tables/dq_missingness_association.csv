@@ -1,0 +1,4 @@
+test,result,interpretation
+History missing vs tier,not deterministic,tier 2: 159/159 roles missing history; tier 1: 65/141
+History missing vs category,5 of 15 categories fully missing,"Hospitality, Food & Personal Service, Public Service & Safety, Science & Engineering, Skilled Trades & Construction, Transportation & Logistics"
+Residual gaps inside the historical panel,0 missing cells,76 panel roles x 4 later quarters is complete

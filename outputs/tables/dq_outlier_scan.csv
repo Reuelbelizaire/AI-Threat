@@ -1,0 +1,4 @@
+column,q1,q3,lower_fence,upper_fence,n_flagged,pct_flagged,min_flagged,max_flagged,examples
+score,15,44,-28.5,87.5,1,0.3,92,92,Data Entry Clerk
+salary_low_usd,40000,70000,-5000,115000,16,5.3,120000,300000,Radiologist; Surgeon; Psychiatrist
+salary_high_usd,68000,130000,-25000,223000,9,3,250000,500000,Radiologist; Surgeon; Physician

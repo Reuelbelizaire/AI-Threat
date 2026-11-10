@@ -1,0 +1,27 @@
+column,dtype,n_non_null,n_missing,pct_missing,n_unique,example
+slug,character,300,0,0,300,it-support-specialist
+title,character,300,0,0,300,IT Support Specialist
+category,character,300,0,0,15,Technology
+score,numeric,300,0,0,71,66
+risk_level,character,300,0,0,4,High
+salary_low_usd,numeric,300,0,0,46,45000
+salary_high_usd,numeric,300,0,0,61,75000
+salary_trend,character,300,0,0,4,declining
+tasks_at_risk_count,numeric,300,0,0,3,5
+tasks_growing_count,numeric,300,0,0,3,3
+defense_skill_1,character,300,0,0,298,Administering AI Helpdesk Agents
+defense_skill_2,character,300,0,0,300,Cybersecurity Fundamentals
+defense_skill_3,character,300,0,0,298,Cloud Platform & Identity Management
+insight,character,300,0,0,300,AI helpdesk agents now resolve most tier-1 tickets -- resets
+score_q1_2025,numeric,76,224,74.7,26,50
+score_q3_2025,numeric,76,224,74.7,33,55
+score_q1_2026,numeric,76,224,74.7,35,60
+score_q2_2026,numeric,76,224,74.7,28,65
+score_q3_2026,numeric,300,0,0,71,66
+soc_code,character,300,0,0,248,15-1232
+tier,numeric,300,0,0,2,1
+sub_task_automation,numeric,300,0,0,54,70
+sub_tool_maturity,numeric,300,0,0,41,80
+sub_adoption,numeric,300,0,0,43,68
+sub_agentic_exposure,numeric,300,0,0,43,62
+agentic_risk,character,300,0,0,4,High

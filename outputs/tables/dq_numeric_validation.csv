@@ -1,0 +1,14 @@
+check,column,n_failures,detail,status
+Scores/counts stored as whole numbers,"score, salary_low_usd, salary_high_usd, tasks_at_risk_count, tasks_growing_count, tier, sub_task_automation, sub_tool_maturity, sub_adoption, sub_agentic_exposure, score_q1_2025, score_q3_2025, score_q1_2026, score_q2_2026, score_q3_2026",0,"All scores, salaries, counts and sub-scores are integers",pass
+salary_low_usd < salary_high_usd,salary bounds,0,Lower bound strictly below upper bound for all 300 roles; no equal or inverted bounds,pass
+Salaries positive,salary bounds,0,"Range $24,000-$500,000; anchored to BLS OES p25-p75",pass
+Negative values in numeric columns,all numeric,0,No negative entries,pass
+score within documented 0-100 range,score,0,Observed range 4-92,pass
+Sub-scores within 0-100,"sub_task_automation, sub_tool_maturity, sub_adoption, sub_agentic_exposure",0,All four sub-scores bounded 0-100 for all 300 roles,pass
+Quarterly scores within 0-100,"score_q1_2025, score_q3_2025, score_q1_2026, score_q2_2026, score_q3_2026",0,All 604 observed quarterly values bounded 0-100,pass
+score equals score_q3_2026,"score, score_q3_2026",0,"The current score is definitionally the Q3 2026 value, so the two columns are perfectly redundant",legitimate
+Composite reproducible from sub-scores,"score, sub-scores",0,"Published formula reproduces the score for 300/300 roles (max |diff| = 0.50, rounding only)",pass
+tasks_at_risk_count equals task list length,tasks_at_risk_count,0,Counts match JSON task lists (range 3-5),pass
+tasks_growing_count equals task list length,tasks_growing_count,0,Counts match JSON task lists (range 2-4),pass
+Salary spread wider than 150% of lower bound,salary bounds,9,"Median spread 73%; 9 roles exceed 150% (e.g. Investment Banker $85k-$275k, Surgeon $280k-$450k). Consistent with p25-p75 bounds",legitimate
+Crosswalk rows with no matched role,"nearest_role_slug, score, risk_level (crosswalk)",33,33 of 867 SOC codes are 'unmatched': farm (45-xxxx) and military (55-xxxx) occupations sit outside the 300 scored roles,structural
