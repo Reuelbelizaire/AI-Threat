@@ -4,16 +4,16 @@ Duplicate role slugs / titles,"slug, title",0,Each role appears exactly once,pas
 Leading/trailing whitespace,text columns,0,No stray whitespace in any of the 11 text fields,pass
 Non-ASCII characters (encoding integrity),insight,7,"{'insight': 7}: curly quotes and em dashes inside free-text insights, not corrupted encodings",legitimate
 "Missing-value sentinel tokens (NA, null, '-', ...)",text columns,0,Missing data uses true blanks only; no sentinel tokens found,pass
-Label domain: category,category,0,"15 levels, consistent casing/spelling: ['Administrative & Operations', 'Business & Finance', 'Creative', 'Education', 'HR & Recruiting', 'Healthcare', 'Hospitality, Food & Personal Service', 'Legal', 'Marketing & Sales', 'Project & Product Management', 'Public Service & Safety', 'Science & Engineering', 'Skilled Trades & Construction', 'Technology', 'Transportation & Logistics']",pass
-Label domain: risk_level,risk_level,0,"4 levels, consistent casing/spelling: ['High', 'Low', 'Moderate', 'Very High']",pass
-Label domain: salary_trend,salary_trend,0,"4 levels, consistent casing/spelling: ['declining', 'mixed', 'rising', 'stable']",pass
-Label domain: agentic_risk,agentic_risk,0,"4 levels, consistent casing/spelling: ['High', 'Low', 'Moderate', 'Very High']",pass
-Label domain: tier,tier,0,"2 levels, consistent casing/spelling: [1, 2]",pass
+Label domain: category,category,0,"15 levels, consistent casing/spelling: 'Administrative & Operations', 'Business & Finance', 'Creative', 'Education', 'Healthcare', 'Hospitality, Food & Personal Service', 'HR & Recruiting', 'Legal', 'Marketing & Sales', 'Project & Product Management', 'Public Service & Safety', 'Science & Engineering', 'Skilled Trades & Construction', 'Technology', 'Transportation & Logistics'",pass
+Label domain: risk_level,risk_level,0,"4 levels, consistent casing/spelling: 'High', 'Low', 'Moderate', 'Very High'",pass
+Label domain: salary_trend,salary_trend,0,"4 levels, consistent casing/spelling: 'declining', 'mixed', 'rising', 'stable'",pass
+Label domain: agentic_risk,agentic_risk,0,"4 levels, consistent casing/spelling: 'High', 'Low', 'Moderate', 'Very High'",pass
+Label domain: tier,tier,0,"2 levels, consistent casing/spelling: '1', '2'",pass
 Category labels match JSON metadata,category,0,"All 15 labels identical across CSV, JSON metadata and JSON roles",pass
 SOC code format (NN-NNNN),soc_code,0,All 300 codes follow the BLS SOC 2018 pattern,pass
 Slug format (lowercase-hyphen),slug,0,All slugs are clean URL-safe identifiers,pass
 SOC codes present in crosswalk,soc_code,0,Every scored role's SOC code appears in soc-crosswalk.csv,pass
 SOC codes shared by several roles,soc_code,81,"29 BLS codes map to 2-5 distinct role rows (e.g. 13-1071 -> Recruiter, HR Generalist, Talent Sourcer). Legitimate, not duplication error",legitimate
-CSV vs JSON agreement,"score, salary, task counts, quarterly history",0,"row order=True, scores=True, salaries=True, task counts=True, quarterly history=True",pass
+CSV vs JSON agreement,"score, salary, task counts, quarterly history",0,"row order=TRUE, scores=TRUE, salaries=TRUE, task counts=TRUE, quarterly history=TRUE",pass
 risk_level matches documented bands,"score, risk_level",14,14 roles carry a band one step away from the band implied by their score; 11 sit within 5 points of a published boundary (the metadata's band-stability rule) and 4 are roles with a documented restatement reason. Labels are therefore consistent with the rubric but not a deterministic function of score,legitimate
 agentic_risk matches sub-score bands,"agentic_risk, sub_agentic_exposure",0,agentic_risk is a pure band of the agentic sub-score and adds no information beyond it,legitimate

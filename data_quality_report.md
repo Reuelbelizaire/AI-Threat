@@ -3,8 +3,13 @@
 **Step 2 deliverable.** Dataset: `ai-career-threat-index` v2026.3 (MeritForge AI),
 https://github.com/Jott2121/ai-career-threat-index, MIT licence. Raw files are kept
 untouched in `data/raw/`; nothing in this step is cleaned, imputed or deleted.
-Code: `src/data_quality.py`. Tables: `outputs/tables/dq_*.csv`.
-Figure: `outputs/figures/dq_missingness_overview.png`.
+Code: `src/data_quality.R` (R 4.6; packages in `requirements.R`).
+Tables: `outputs/tables/dq_*.csv`. Figure: `outputs/figures/dq_missingness_overview.png`.
+
+```bash
+Rscript requirements.R        # install readr, dplyr, jsonlite, ggplot2, patchwork
+Rscript src/data_quality.R    # regenerate every table and the figure from data/raw/
+```
 
 ## 1. Dataset dimensions
 
