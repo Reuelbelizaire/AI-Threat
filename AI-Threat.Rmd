@@ -10,8 +10,11 @@ output: html_document
 library(readr)
 library(tidyr)
 library(dplyr)
+#install.packages("remotes")
+#remotes::install_github("mtennekes/tabplot")
 #install.packages("ggalluvial")
 library(ggalluvial)
+
 
 ```
 #Loading data
@@ -38,7 +41,7 @@ Are lower-paying jobs more vulnerable to AI disruption, or does AI disproportion
 ```{r}
 ```
 
-#Cycnier's question (3)
+#Cynier's question (3)
 Within the highest-risk sectors identified by Person 1, how do education requirements or specific job sub-categories separate "high-risk" from "AI-resilient" roles?
 
 ```{r}
