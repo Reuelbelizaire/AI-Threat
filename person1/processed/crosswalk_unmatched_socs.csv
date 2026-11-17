@@ -1,0 +1,34 @@
+soc_code,soc_key,soc_title,match_quality
+45-1011,451011,"First-Line Supervisors of Farming, Fishing, and Forestry Workers",unmatched
+45-2011,452011,Agricultural Inspectors,unmatched
+45-2021,452021,Animal Breeders,unmatched
+45-2041,452041,"Graders and Sorters, Agricultural Products",unmatched
+45-2091,452091,Agricultural Equipment Operators,unmatched
+45-2092,452092,"Farmworkers and Laborers, Crop, Nursery, and Greenhouse",unmatched
+45-2093,452093,"Farmworkers, Farm, Ranch, and Aquacultural Animals",unmatched
+45-2099,452099,"Agricultural Workers, All Other",unmatched
+45-3031,453031,Fishing and Hunting Workers,unmatched
+45-4011,454011,Forest and Conservation Workers,unmatched
+45-4021,454021,Fallers,unmatched
+45-4022,454022,Logging Equipment Operators,unmatched
+45-4023,454023,Log Graders and Scalers,unmatched
+45-4029,454029,"Logging Workers, All Other",unmatched
+55-1011,551011,Air Crew Officers,unmatched
+55-1012,551012,Aircraft Launch and Recovery Officers,unmatched
+55-1013,551013,Armored Assault Vehicle Officers,unmatched
+55-1014,551014,Artillery and Missile Officers,unmatched
+55-1015,551015,Command and Control Center Officers,unmatched
+55-1016,551016,Infantry Officers,unmatched
+55-1017,551017,Special Forces Officers,unmatched
+55-1019,551019,"Military Officer Special and Tactical Operations Leaders, All Other",unmatched
+55-2011,552011,First-Line Supervisors of Air Crew Members,unmatched
+55-2012,552012,First-Line Supervisors of Weapons Specialists/Crew Members,unmatched
+55-2013,552013,First-Line Supervisors of All Other Tactical Operations Specialists,unmatched
+55-3011,553011,Air Crew Members,unmatched
+55-3012,553012,Aircraft Launch and Recovery Specialists,unmatched
+55-3013,553013,Armored Assault Vehicle Crew Members,unmatched
+55-3014,553014,Artillery and Missile Crew Members,unmatched
+55-3015,553015,Command and Control Center Specialists,unmatched
+55-3016,553016,Infantry,unmatched
+55-3018,553018,Special Forces,unmatched
+55-3019,553019,"Military Enlisted Tactical Operations and Air/Weapons Specialists and Crew Members, All Other",unmatched
