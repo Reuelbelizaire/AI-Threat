@@ -36,6 +36,119 @@ How clean is the joined dataset, and which broad industry sectors (2-digit SOC m
 Are lower-paying jobs more vulnerable to AI disruption, or does AI disproportionately threaten high-wage cognitive roles?
 
 ```{r}
+library(tidyverse)
+library(scales)
+library(ggrepel)
+
+df <- read_csv("ai-career-threat-index.csv")
+
+df_clean <- df %>%
+  mutate(
+    mid_salary = (salary_low_usd + salary_high_usd) / 2,
+    income_tier = case_when(
+      mid_salary < 60000 ~ "Low Income (<$60k)",
+      mid_salary >= 60000 & mid_salary < 120000 ~ "Middle Income ($60k-$120k)",
+      mid_salary >= 120000 ~ "High Income (>$120k)"
+    ),
+    income_tier = factor(income_tier, levels = c("Low Income (<$60k)", "Middle Income ($60k-$120k)", "High Income (>$120k)")),
+    risk_level = factor(risk_level, levels = c("Low", "Moderate", "High", "Very High"))
+  )
+jobs_to_label <- df_clean %>%
+  arrange(desc(score)) %>%
+  slice(1:5) %>%
+  bind_rows(
+    df_clean %>% arrange(desc(mid_salary)) %>% slice(1:3)
+  ) %>%
+  distinct(title, .keep_all = TRUE)
+
+# Visual 1
+# Calculate the correlation and format it as text
+cor_val <- cor(df_clean$mid_salary, df_clean$score, use = "complete.obs")
+cor_label <- paste0("Pearson R = ", round(cor_val, 2))
+
+scatter_plot_nice <- ggplot(df_clean, aes(x = mid_salary, y = score)) +
+  # Add points
+  geom_point(aes(color = risk_level, size = tasks_at_risk_count), alpha = 0.7) +
+  
+  # Add linear regression line
+  geom_smooth(method = "lm", color = "navy", fill = "coral", linetype = "dashed") +
+  
+  # Add labels for outliers
+  geom_text_repel(
+    data = jobs_to_label,
+    aes(label = title),
+    size = 3.5,
+    box.padding = 0.5,
+    point.padding = 0.3,
+    force = 2,
+    segment.color = "salmon",
+    max.overlaps = 20
+  ) +
+  
+  # ADD CORRELATION MANUALLY HERE (Replaces stat_cor)
+  annotate("text", x = 160000, y = 95, label = cor_label, size = 5, fontface = "bold", color = "navy") +
+  
+  # Formatting
+  scale_x_continuous(labels = dollar_format()) +
+  scale_color_manual(values = c("Low" = "pink", "Moderate" = "darkgreen", "High" = "khaki", "Very High" = "orchid")) +
+  scale_size_continuous(range = c(2, 6), guide = "none") + 
+  
+  labs(
+    title = "The Wage-Wipeout Curve: AI Threat vs. Salary",
+    subtitle = "Overall, higher-paying jobs face less AI threat, but specific high-wage cognitive roles are heavily exposed.",
+    x = "Salary Midpoint (USD)",
+    y = "AI Threat Score (0-100)",
+    color = "AI Risk Level",
+    caption = "Data Source: AI Career Threat Index. Note: Point size indicates tasks at risk."
+  ) +
+  
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", size = 18),
+    plot.subtitle = element_text(color = "salmon", margin = margin(b = 15)),
+    legend.position = "bottom",
+    panel.grid.minor = element_blank()
+  )
+
+print(scatter_plot_nice)
+
+# Visual 2
+distribution_plot_nice <- ggplot(df_clean, aes(x = income_tier, y = score, fill = income_tier)) +
+  
+  geom_violin(alpha = 0.5, trim = FALSE, color = NA) +
+  geom_boxplot(width = 0.15, alpha = 0.8, outlier.shape = NA, color = "black") +
+  geom_jitter(width = 0.1, alpha = 0.4, size = 1.5, color = "navy") +
+  
+  # Add a red diamond for the mean score
+  stat_summary(fun = mean, geom = "point", shape = 18, size = 4, color = "salmon", fill = "salmon") +
+  
+  scale_fill_manual(values = c("Low Income (<$60k)" = "pink", 
+                               "Middle Income ($60k-$120k)" = "pink", 
+                               "High Income (>$120k)" = "pink")) +
+  
+  labs(
+    title = "Distribution of AI Threat Scores by Income Tier",
+    subtitle = "Lower-income roles face a significantly higher median and mean AI threat (Red Diamond = Mean).",
+    x = "Income Tier",
+    y = "AI Threat Score (0-100)",
+    fill = "Income Tier",
+    caption = "Note: Each dot represents a specific job title."
+  ) +
+  
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", size = 18),
+    plot.subtitle = element_text(color = "navy", margin = margin(b = 15)),
+    legend.position = "none", 
+    panel.grid.major.x = element_blank()
+  )
+print(distribution_plot_nice)
+
+
+
+ggsave("Person2_Scatter_Plot.png", plot = scatter_plot_nice, width = 10, height = 7, dpi = 300)
+
+ggsave("Person2_Boxplot.png", plot = distribution_plot_nice, width = 10, height = 7, dpi = 300)
 ```
 
 #Cycnier's question (3)
