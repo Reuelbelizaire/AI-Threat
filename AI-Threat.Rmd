@@ -242,5 +242,39 @@ heatmap_plot <- ggplot(heatmap_df, aes(x = income_tier, y = reorder(category, me
   theme(panel.grid = element_blank(), axis.text.y = element_text(face = "bold"))
 
 print(heatmap_plot)
+
+#linear regression
+
+model_base <- lm(score ~ mid_salary, data = threat_df)
+summary(model_base)
+
+model_trio <- lm(score ~ mid_salary + category + tier, data = threat_df)
+summary(model_trio)
+
+#Does the effect of Salary depend on Sector & Tier?
+model_int <- lm(score ~ mid_salary * category + tier, data = threat_df)
+summary(model_int)
+
+anova(model_base,model_trio,model_int)
+
+interaction_plot <- ggplot(threat_df, aes(x = mid_salary / 1000, y = score, color = tier)) +
+  geom_point(alpha = 0.65, size = 2) +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 1) +
+  facet_wrap(~ category, ncol = 4) +
+  labs(
+    title = "How Salary & Job Tier Interact to Drive AI Threat Across Sectors",
+    subtitle = "Regression slopes differ sharply by industry (ANOVA Interaction p = 4.86e-06)",
+    x = "Midpoint Annual Salary ($ Thousands)",
+    y = "AI Threat Score (0–100)",
+    color = "SOC Tier"
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    strip.text = element_text(face = "bold", size = 9),
+    legend.position = "top"
+  )
+
+print(interaction_plot)
 ```
 
