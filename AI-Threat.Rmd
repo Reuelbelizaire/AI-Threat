@@ -3,6 +3,8 @@ title: "AI-Jobs"
 author: "CREG-DM"
 date: "2026-11-10"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 #Necessary libraries
 ```{r}
@@ -11,9 +13,9 @@ library(readr)
 library(tidyr)
 library(dplyr)
 #install.packages("remotes")
-#remotes::install_github("mtennekes/tabplot")
 #install.packages("ggalluvial")
 library(ggalluvial)
+library(tidyverse)
 
 
 ```
@@ -163,6 +165,82 @@ Within the highest-risk sectors identified by Person 1, how do education require
 #Reuel's question (4)
 When combining sector, compensation, and job classification together, what key interaction drives AI risk—and how do those insights tie our report together?
 ```{r}
+ai_df<- read_csv("ai-career-threat-index.csv")
+soc_df <- read_csv("soc-crosswalk.csv")
 
+head(ai_df)
+names(ai_df) #main id = soc_code (15-1232)
+barplot(colSums(is.na(ai_df)),
+        las = 2) # the NA values are for the quarterly information 
+
+
+head(soc_df)
+names(soc_df) #main id = soc_code (11-1011)
+barplot(colSums(is.na(soc_df)),
+        las = 2)
+
+#check to see if the join will work before i adjust the values in the df
+PK_code <- intersect(ai_df$soc_code,soc_df$soc_code)
+
+length(PK_code) #248
+length(setdiff(ai_df$soc_code,soc_df$soc_code))
+nrow(ai_df) #300
+
+nrow(soc_df) #867
+length(unique(soc_df$soc_code)) #867
+
+#?left_join()
+threat_df <- left_join(ai_df,
+                       soc_df, 
+                       by = "soc_code")
+names(threat_df)
+
+ rename(threat_df$score.x,threat_df$score.y)
+
+#merge score & risk level
+threat_df <- threat_df %>% 
+  rename(score = score.x,
+         risk_level= risk_level.x) %>%
+  select(-score.y,-risk_level.y)
+#?case_when
+threat_df <- threat_df %>%
+  mutate(
+    mid_salary = (salary_low_usd + salary_high_usd) / 2,
+    risk_level = factor(risk_level, levels = c("Low", "Moderate", "High", "Very High")),
+    income_tier = case_when(
+      mid_salary < 60000 ~ "Low Income (<$60k)",
+      mid_salary >= 60000 & mid_salary < 120000 ~ "Middle Income ($60k-$120k)",
+      mid_salary >= 120000 ~ "High Income (>$120k)"
+    ),
+    income_tier = factor(income_tier, levels = c("Low Income (<$60k)", "Middle Income ($60k-$120k)", "High Income (>$120k)")),
+    tier = factor(tier, levels = c(1, 2), labels = c("Tier 1", "Tier 2"))
+  )
+
+table(threat_df$income_tier)
+table(threat_df$category)
+table(threat_df$tier)
+head(threat_df)
+
+#models
+heatmap_df <- threat_df %>%
+  group_by(category,income_tier) %>%
+  summarise(
+    mean_score = mean(score, na.rm = TRUE),
+    n = n(),
+    .groups = "drop"
+  )
+
+print(heatmap_df)
+
+heatmap_plot <- ggplot(heatmap_df, aes(x = income_tier, y = reorder(category, mean_score), fill = mean_score)) +
+  geom_tile(color = "white", linewidth = 0.8) +
+  geom_text(aes(label = paste0(round(mean_score, 1), " (n=", n, ")")), size = 3.3) +
+  scale_x_discrete(labels = c("Low Income\n(<$60k)", "Middle Income\n($60k-$120k)", "High Income\n(>$120k)")) +
+  scale_fill_gradient2(low = "#2b8cbe", mid = "#fee08b", high = "#d73027", midpoint = 50) +
+  labs(title = "AI Threat Score by Sector & Income Tier", x = NULL, y = NULL, fill = "Avg Score") +
+  theme_minimal(base_size = 12) +
+  theme(panel.grid = element_blank(), axis.text.y = element_text(face = "bold"))
+
+print(heatmap_plot)
 ```
 
